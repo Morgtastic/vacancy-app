@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Manage Tables</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="./assets/js/config.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div id="login" class="card hidden">
+      <h3>Sign in</h3>
+      <form id="loginForm" class="grid">
+        <input id="loginEmail" class="input" placeholder="Email" type="email" required>
+        <input id="loginPassword" class="input" placeholder="Password" type="password" required>
+        <button class="button primary" type="submit">Log in</button>
+        <div id="loginError" class="small" style="color:#fca5a5"></div>
+        <a class="small" href="./forgot-password.html">Forgot password?</a>
+      </form>
+    </div>
+
+    <div id="app" class="hidden">
+      <div class="header">
+        <h2 id="bizName">Manage</h2>
+        <div class="row">
+          <a href="./index.html" class="button ghost">Board</a>
+          <a href="./change-password.html" class="button ghost">Change Password</a>
+        </div>
+      </div>
+
+      <div id="tables" class="grid"></div>
+    </div>
+
+    <div class="footer">Timeless Vacancy • Manage</div>
+  </div>
+
+  <script type="module" src="./assets/js/app.js"></script>
+  <script type="module" src="./assets/js/manage.js"></script>
+</body>
+</html>

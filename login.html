@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Login</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="./assets/js/config.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Login</h2>
+      <a href="./index.html" class="button ghost">Board</a>
+    </div>
+    <div class="card">
+      <form id="loginForm" class="grid">
+        <input id="loginEmail" class="input" placeholder="Email" type="email" required>
+        <input id="loginPassword" class="input" placeholder="Password" type="password" required>
+        <button class="button primary" type="submit">Log in</button>
+        <div id="loginError" class="small" style="color:#fca5a5"></div>
+        <a class="small" href="./forgot-password.html">Forgot password?</a>
+      </form>
+    </div>
+  </div>
+  <script type="module">
+    import { supabase } from "./assets/js/app.js";
+    const form = document.getElementById("loginForm");
+    const err = document.getElementById("loginError");
+    form.addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      err.textContent = "";
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if(error){ err.textContent = error.message; return; }
+      // If a business param exists in URL, forward it
+      const url = new URL(location.href);
+      const biz = url.searchParams.get("business");
+      if(biz){ location.href = "./manage.html?business="+encodeURIComponent(biz); }
+      else{ location.href = "./manage.html"; }
+    });
+  </script>
+</body>
+</html>
